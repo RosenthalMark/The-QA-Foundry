@@ -6,38 +6,65 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-console.log('\n--- FOUNDRY ROADMAP PROTOCOL ---');
+const roadmapPath = './ROADMAP.md';
 
-const addTask = () => {
-    rl.question('📝 New Task (or press Enter to skip): ', (task) => {
-        if (task && task.trim() !== "") {
-            try {
-                const roadmapPath = './ROADMAP.md';
-                const newTask = `- [ ] ${task}\n`;
-                fs.appendFileSync(roadmapPath, newTask);
-                console.log(`✅ Task Logged: ${task}`);
+const getTaskInput = () => {
+    console.log('\n--- FOUNDRY TASK INJECTOR ---');
+    console.log('(Ctrl+C to abort)\n');
+
+    rl.question('📝 Task Title: ', (title) => {
+        if (!title.trim()) {
+            console.log('❌ Title required.');
+            return getTaskInput();
+        }
+
+        rl.question('📖 Description (Enter to skip): ', (desc) => {
+            rl.question('📍 Phase Number: ', (phaseNum) => {
+                const phase = phaseNum.trim() || "1";
+                injectTask(title.trim(), desc.trim(), phase);
                 
-                rl.question('➕ Add another task? (y/n): ', (ans) => {
+                rl.question('\n➕ Add another? (y/n): ', (ans) => {
                     if (ans.toLowerCase() === 'y') {
-                        addTask();
+                        getTaskInput();
                     } else {
-                        console.log('🚀 Finalizing Roadmap. Proceeding to sync...');
+                        console.log('🚀 Roadmap updated.');
                         rl.close();
                     }
                 });
-            } catch (err) {
-                console.log('❌ Error updating ROADMAP.md');
-                rl.close();
-            }
-        } else {
-            console.log('⏩ No more tasks. Proceeding to sync...');
-            rl.close();
-        }
+            });
+        });
     });
 };
 
-addTask();
+const injectTask = (title, desc, phaseNum) => {
+    try {
+        let content = fs.readFileSync(roadmapPath, 'utf8');
+        const phaseHeader = `### PHASE ${phaseNum}`;
+        // Clean task line: NO forced "ing"
+        const taskLine = `* **${title}**${desc ? `: ${desc}` : ''}\n`;
 
-rl.on('close', () => {
-    process.exit(0);
-});
+        const phaseIndex = content.indexOf(phaseHeader);
+
+        if (phaseIndex !== -1) {
+            const contentAfterPhase = content.slice(phaseIndex + phaseHeader.length);
+            const nextPhaseMatch = contentAfterPhase.match(/### PHASE \d+/);
+
+            if (nextPhaseMatch) {
+                const nextPhasePos = content.indexOf(nextPhaseMatch[0], phaseIndex + phaseHeader.length);
+                content = content.slice(0, nextPhasePos).trimEnd() + '\n' + taskLine + '\n' + content.slice(nextPhasePos);
+            } else {
+                content = content.trimEnd() + '\n' + taskLine;
+            }
+            console.log(`✅ Injected into Phase ${phaseNum}`);
+        } else {
+            content = content.trimEnd() + `\n\n${phaseHeader}\n${taskLine}`;
+            console.log(`✨ Created Phase ${phaseNum}`);
+        }
+
+        fs.writeFileSync(roadmapPath, content);
+    } catch (err) {
+        console.log('❌ Error writing to ROADMAP.md');
+    }
+};
+
+getTaskInput();
