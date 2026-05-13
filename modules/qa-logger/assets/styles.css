@@ -1,7 +1,62 @@
-body { background-color: #0a0a0a; color: #00ff41; font-family: 'Courier New', Courier, monospace; display: flex; justify-content: center; padding: 20px; }
-.terminal-container { border: 1px solid #00ff41; padding: 30px; width: 600px; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); }
-h1, h3 { border-bottom: 1px solid #00ff41; padding-bottom: 10px; }
-select, textarea, button { background: #111; color: #00ff41; border: 1px solid #00ff41; width: 100%; margin: 10px 0; padding: 10px; font-family: inherit; }
-.check-item { margin: 8px 0; display: flex; align-items: center; }
-input[type="checkbox"] { margin-right: 15px; accent-color: #00ff41; }
-button:hover { background: #00ff41; color: #000; cursor: pointer; }
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --accent-color: #38bdf8;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.terminal-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    width: 500px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+h1 { font-size: 1.5rem; letter-spacing: -0.025em; color: var(--accent-color); margin-bottom: 24px; }
+
+select, textarea, button {
+    background: #1e293b;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 100%;
+    margin: 12px 0;
+    padding: 12px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+textarea { min-height: 120px; resize: vertical; }
+
+button {
+    background: var(--accent-color);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #7dd3fc;
+    transform: translateY(-1px);
+}
+
+.check-item { color: var(--text-secondary); margin: 12px 0; font-size: 14px; }
+input[type="checkbox"] { accent-color: var(--accent-color); margin-right: 12px; }

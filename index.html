@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE FOUNDRY // Command Center</title>
+    <link rel="stylesheet" href="core/css/shell.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="onboarding-overlay" class="overlay">
+        <div class="glass-card onboarding-content">
+            <h1>IDENTITY VERIFICATION</h1>
+            <p>Enter your Operator Handle to initialize the environment.</p>
+            <input type="text" id="operator-handle" placeholder="e.g. M. Rosenthal">
+            <button onclick="initializeOperator()">INITIALIZE SYSTEM</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-accent">//</span> FOUNDRY
+            </div>
+            <nav>
+                <div class="nav-label">OPERATIONS</div>
+                <a href="#" class="nav-item active" onclick="loadModule('manual')">Manual Audit</a>
+                <a href="#" class="nav-item locked">API Strike <span>LOCKED</span></a>
+                <a href="#" class="nav-item locked">Automation <span>LOCKED</span></a>
+                
+                <div class="nav-label">INTEL</div>
+                <a href="#" class="nav-item" onclick="showDocs()">Documentation</a>
+                <a href="#" class="nav-item" onclick="showLogs()">Mission Logs</a>
+            </nav>
+            <div class="operator-profile">
+                <div class="avatar" id="user-avatar">?</div>
+                <div class="details">
+                    <span id="display-handle">Guest</span>
+                    <small>RANK: TRAINEE</small>
+                </div>
+            </div>
+        </aside>
+
+        <main id="main-stage">
+            <div class="empty-state">
+                <h2>Awaiting System Initialization...</h2>
+            </div>
+        </main>
+    </div>
+
+    <script src="core/js/app.js"></script>
+</body>
+</html>
