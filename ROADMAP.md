@@ -17,3 +17,7 @@
 - [ ] API Verification Module
 - [ ] Automation Playground (Cypress/Playwright Integration)
 - [ ] AI-Assisted QA Toolbelt- [ ] Build "Bug Writing 101" interactive deconstruction quiz
+- [ ] Build Bug Tracker Drawer
+- [ ] Implement Logic for Bug Severity Color-Coding in Tracker
+- [ ] Create JSON Export for Mission Reports
+- [ ] Build 'Environmental Noise' Simulator

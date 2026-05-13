@@ -6,22 +6,38 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('Enter new Roadmap Task: ', (task) => {
-    if (!task) {
-        console.log('No task entered. Skipping.');
-        process.exit();
-    }
+console.log('\n--- FOUNDRY ROADMAP PROTOCOL ---');
 
-    const roadmapPath = './ROADMAP.md';
-    let content = fs.readFileSync(roadmapPath, 'utf8');
-    
-    // Logic to append to the current active phase (Phase 01 or 02)
-    const newTask = `- [ ] ${task}\n`;
-    
-    // For now, we append to the end of the file for simplicity, 
-    // but we can make this target specific headers later.
-    fs.appendFileSync(roadmapPath, newTask);
-    
-    console.log(`✅ Added to Roadmap: ${task}`);
-    process.exit();
+const addTask = () => {
+    rl.question('📝 New Task (or press Enter to skip): ', (task) => {
+        if (task && task.trim() !== "") {
+            try {
+                const roadmapPath = './ROADMAP.md';
+                const newTask = `- [ ] ${task}\n`;
+                fs.appendFileSync(roadmapPath, newTask);
+                console.log(`✅ Task Logged: ${task}`);
+                
+                rl.question('➕ Add another task? (y/n): ', (ans) => {
+                    if (ans.toLowerCase() === 'y') {
+                        addTask();
+                    } else {
+                        console.log('🚀 Finalizing Roadmap. Proceeding to sync...');
+                        rl.close();
+                    }
+                });
+            } catch (err) {
+                console.log('❌ Error updating ROADMAP.md');
+                rl.close();
+            }
+        } else {
+            console.log('⏩ No more tasks. Proceeding to sync...');
+            rl.close();
+        }
+    });
+};
+
+addTask();
+
+rl.on('close', () => {
+    process.exit(0);
 });
