@@ -1,0 +1,10 @@
+{
+    "project": "The QA Foundry",
+    "version": "1.0.2",
+    "last_update": "2026-05-13",
+    "active_module": "Manual Audit",
+    "operator_state": {
+      "ranks": ["TRAINEE", "JUNIOR OPERATOR", "OPERATOR", "SENIOR OPERATOR", "STAFF ARCHITECT"],
+      "current_rank_index": 0
+    }
+  }
