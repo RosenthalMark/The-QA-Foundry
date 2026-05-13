@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FOUNDRY // Manual Logger</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <h1>[ SIGNAL_LOGGER_V1 ]</h1>
+        <label>Target Environment:</label>
+        <select id="site-select">
+            <option value="testghost">TestGhost.com (Prod)</option>
+            <option value="saucedemo">SauceDemo (Standard Lab)</option>
+            <option value="the-internet">The Internet (Edge Cases)</option>
+        </select>
+        <div id="checklist-area">
+            <h3>Active Checklist</h3>
+            <div class="check-item"><input type="checkbox"> Verify Page Title Loading</div>
+            <div class="check-item"><input type="checkbox"> Inspect Console for Errors (F12)</div>
+            <div class="check-item"><input type="checkbox"> Mobile Responsive Check (390px)</div>
+            <div class="check-item"><input type="checkbox"> Form Submission Integrity</div>
+        </div>
+        <textarea id="bug-notes" placeholder="Enter findings or bug reproduction steps..."></textarea>
+        <button onclick="saveLog()">EXPORT LOG TO MD</button>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
