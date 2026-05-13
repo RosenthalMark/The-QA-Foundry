@@ -73,3 +73,21 @@ main { padding: 3rem; overflow-y: auto; background: radial-gradient(circle at to
     cursor: pointer; transition: 0.2s; width: 100%;
 }
 .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
+
+/* Bug Tracker Drawer */
+.bug-drawer {
+    position: fixed; top: 0; right: -400px; width: 400px; height: 100%;
+    background: var(--sidebar); border-left: 1px solid var(--border);
+    z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2rem; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+}
+
+.bug-drawer.active { right: 0; }
+
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; color: var(--text-dim); font-size: 0.7rem; margin-bottom: 0.5rem; }
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%; background: #000; border: 1px solid var(--border);
+    color: var(--text); padding: 0.8rem; border-radius: 4px; font-family: inherit;
+}

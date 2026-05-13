@@ -26,4 +26,23 @@ const router = {
     }
 };
 
+router.toggleTracker = function() {
+    document.getElementById('bug-tracker').classList.toggle('active')
+}
+
+router.saveBug = function() {
+    const title = document.getElementById('bug-title').value
+    if(!title) return alert("Title is mandatory, Operator.")
+    
+    // Log it to the console for now
+    console.log("Bug Logged:", title)
+    
+    // Visual feedback
+    alert("Bug logged to Mission Logs. Nice work.")
+    this.toggleTracker()
+    
+    // Reset form
+    document.getElementById('bug-title').value = ''
+}
+
 // Update your sidebar HTML to call: router.loadModule('manual')
