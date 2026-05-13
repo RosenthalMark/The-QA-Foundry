@@ -57,3 +57,19 @@ body {
 
 /* MAIN CONTENT */
 main { padding: 3rem; overflow-y: auto; background: radial-gradient(circle at top right, #1e293b, transparent); }
+
+.module-header { margin-bottom: 2rem; border-left: 4px solid var(--accent); padding-left: 1.5rem; }
+.module-header h1 { font-size: 2rem; margin: 0; }
+.module-header p { color: var(--text-dim); margin: 5px 0 0; }
+
+.onboarding-grid { display: grid; gap: 2rem; margin-top: 2rem; }
+.docs-card { text-align: left; padding: 2rem; max-width: 800px; }
+.docs-card ul { color: var(--text-dim); line-height: 1.6; margin: 1.5rem 0; }
+.docs-card li strong { color: var(--accent); }
+
+.primary-btn {
+    background: var(--accent); color: #000; border: none;
+    padding: 1rem 2rem; border-radius: 8px; font-weight: 800;
+    cursor: pointer; transition: 0.2s; width: 100%;
+}
+.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
