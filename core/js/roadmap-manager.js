@@ -8,11 +8,21 @@ const rl = readline.createInterface({
 
 const roadmapPath = './ROADMAP.md';
 
-const getTaskInput = () => {
-    console.log('\n--- FOUNDRY TASK INJECTOR ---');
-    console.log('(Ctrl+C to abort)\n');
+const startManager = () => {
+    // THE INITIAL GATE
+    rl.question('➕ Do you have anything to add to the roadmap? (y/n): ', (initialAns) => {
+        if (initialAns.toLowerCase() !== 'y') {
+            console.log('⏩ Skipping roadmap updates. Moving to deployment...');
+            rl.close();
+            process.exit(0); // Exit with success so the shell script continues
+        }
+        
+        getTaskInput();
+    });
+};
 
-    rl.question('📝 Task Title: ', (title) => {
+const getTaskInput = () => {
+    rl.question('\n📝 Task Title: ', (title) => {
         if (!title.trim()) {
             console.log('❌ Title required.');
             return getTaskInput();
@@ -23,11 +33,11 @@ const getTaskInput = () => {
                 const phase = phaseNum.trim() || "1";
                 injectTask(title.trim(), desc.trim(), phase);
                 
-                rl.question('\n➕ Add another? (y/n): ', (ans) => {
+                rl.question('\n➕ Add another task? (y/n): ', (ans) => {
                     if (ans.toLowerCase() === 'y') {
-                        getTaskInput();
+                        getTaskInput(); 
                     } else {
-                        console.log('🚀 Roadmap updated.');
+                        console.log('🚀 Finalizing roadmap changes...');
                         rl.close();
                     }
                 });
@@ -40,7 +50,6 @@ const injectTask = (title, desc, phaseNum) => {
     try {
         let content = fs.readFileSync(roadmapPath, 'utf8');
         const phaseHeader = `### PHASE ${phaseNum}`;
-        // Clean task line: NO forced "ing"
         const taskLine = `* **${title}**${desc ? `: ${desc}` : ''}\n`;
 
         const phaseIndex = content.indexOf(phaseHeader);
@@ -67,4 +76,4 @@ const injectTask = (title, desc, phaseNum) => {
     }
 };
 
-getTaskInput();
+startManager();
